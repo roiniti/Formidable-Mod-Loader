@@ -10,6 +10,8 @@ Also I want to thank Egoist (https://github.com/Egoistically) for helping me wit
 > [!WARNING]
 > This is a modification of the game and can lead to a ban, but some mods should be harmless
 
+## About the source code
+I'm pollishing it, when I have a better source code I'll release it to the public
 
 ## For Azur Lane devs
 If ever a developer of the game reads this, please dont ban me or takedown the project, first contact me on discord, I think mod developing can be good, and this is only a tool, like I said before I do not support cheaters, I'm not doing this project with bad intentions, please before taking actions on this contact me
