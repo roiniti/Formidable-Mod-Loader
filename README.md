@@ -16,7 +16,8 @@ I'm pollishing it, when I have a better source code I'll release it to the publi
 ## For Azur Lane devs
 If ever a developer of the game reads this, please dont ban me or takedown the project, first contact me on discord, I think mod developing can be good, and this is only a tool, like I said before I do not support cheaters, I'm not doing this project with bad intentions, please before taking actions on this contact me
 
-
+# Adding mods
+After you install FormidableML create a folder named mods inside Android/data/com.YostarEN.AzurLane/files and put inside all the mods folder you want
 
 ## Installing FormidableML using the autopatcher
 1. Download libFormidableML.so and AzurLane-Autopatcher.zip from [here](https://github.com/roiniti/Formidable-Mod-Loader/releases/tag/FormidableML-0.1.0)
