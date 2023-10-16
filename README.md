@@ -2,7 +2,7 @@
 A mod loader for Azur Lane, if you want some mods, or learn a bit of the mod structure you can check [my mods repo](https://github.com/roiniti/Azur-Lane-Mods/tree/main) or you can join the [discord server](https://discord.gg/Wg3pNmmS5J)  
 Also I want to thank Egoist (https://github.com/Egoistically) for helping me with this project (also I'm using code from one of his projects)
 > [!NOTE]
-> Only works for arm64-v8a!!, I'm working on a arm64-v8a and x86 release
+> Only works for arm64-v8a!!, I'm working on a armeabi-v7a and x86 release
 
 > [!IMPORTANT]
 > This is NOT INTENDED to hack/cheat the game, my goal was to implement QOF mods (like BetterFPSControl) or something like that, I do not support hackers and cheaters
