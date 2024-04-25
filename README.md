@@ -32,7 +32,10 @@ After you install FormidableML create a folder named mods inside Android/data/co
 2. Download zipalign and apksigner
 3. Create a keystore
 4. Extract the Azur Lane apk using apktool
-5. Add the following method to `smali_classes2\com\unity3d\player\UnityPlayerActivity`, anywhere above its `onCreate`:
+```
+java -jar apktool.jar d ./azur-lane.apk -o extracted/apk -f
+```
+5. Add the following method to `smali_classes2\com\unity3d\player\UnityPlayerActivity` or `smali\com\unity3d\player\UnityPlayerActivity` (depends on the AL version), anywhere above its `onCreate`:
 ```smali
 .method private static native init(Landroid/content/Context;)V
 .end method
@@ -47,11 +50,18 @@ And these lines to `onCreate`:
 ```
 (Preferably without replacing other variables, such as between `.locals 2` and `const/4 v0, 0x1`.)  
   
-Also you'll need to enable debug mode, go to AndroidManifest.xml and add `android:debuggable="true"` after application, should look like this:
+Also you can enable debug mode (you'll need debug mode on verson 0.1.0, in later versions its recomended), go to AndroidManifest.xml and add `android:debuggable="true"` after application, should look like this:
 ```xml
 <application android:debuggable="true"...
 ```
-6. Put the libFormidableML inside `lib\arm64-v8a`
+6. Put the libFormidableML inside `lib/arm64-v8a`/`lib/armeabi-v7a`/`lib/x86`
 7. Rebuild the apk
+```
+java -jar apktool.jar b extracted/apk -o extracted/recompiled.apk -f
+```
 8. Align the apk and sign it
+```
+zipalign.exe -f 4 extracted/recompiled.apk extracted/aligned.apk
+java -jar apksigner.jar sign -ks my-release-key.keystore -ks-pass pass:password --v1-signing-enabled true --v2-signing-enabled true extracted\aligned.apk
+```
 9. Install the apk
