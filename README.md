@@ -1,4 +1,12 @@
 # Formidable-Mod-Loader
+
+## The modloaded doen't work in the last game version, expect a fix in the long time future (q2 2025 or more)
+
+# For azur lane devs 
+This project is intened to enchance the game with things like BetterFPS mod or to load translations to languages which Azur Lane doesn't support right now like spanish, if you have trouble with cheaters (which I don't support and allow), implement more defenses on the server side because every cliend side patch to prevent this can be avoided.
+If having reasoned this you still want me to take down the project please join the discord server(https://discord.gg/Wg3pNmmS5J, and DM me @roiniti.
+
+
 A mod loader for Azur Lane, if you want some mods, or learn a bit of the mod structure you can check [my mods repo](https://github.com/roiniti/Azur-Lane-Mods/tree/main) or you can join the [discord server](https://discord.gg/Wg3pNmmS5J)  
 Also I want to thank Egoist (https://github.com/Egoistically) for helping me with this project (also I'm using code from one of his projects)
 > [!NOTE]
