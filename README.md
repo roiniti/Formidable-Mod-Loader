@@ -8,7 +8,6 @@ If having reasoned this you still want me to take down the project please join t
 > If you have Azur Lane version 5.1-7.x its recomended to use the version 0.1.1 of the modloader
 
 
-
 A mod loader for Azur Lane, if you want some mods, or learn a bit of the mod structure you can check [my mods repo](https://github.com/roiniti/Azur-Lane-Mods/tree/main) or you can join the [discord server](https://discord.gg/Wg3pNmmS5J)  
 Also I want to thank Egoist (https://github.com/Egoistically) for helping me with this project (also I'm using code from one of his projects)
 > [!NOTE]
@@ -16,25 +15,22 @@ Also I want to thank Egoist (https://github.com/Egoistically) for helping me wit
 > Armeabi-v7a and x86 is implemented >=0.1.1 but not tested
 
 > [!IMPORTANT]
-> This is NOT INTENDED to hack/cheat the game, my goal was to implement QOF mods (like BetterFPSControl) or something like that, I do not support hackers and cheaters
+> This is NOT INTENDED to hack/cheat the game, my goal was to implement QOF mods (like BetterFPSControl) or something like that, I do not support hackers and cheaters and I am not responsible for improper use of this tool
 
 > [!WARNING]
-> This is a modification of the game and can lead to a ban, but some mods should be harmless
+> This is a modification of the game and can lead to a ban, but some mods should be harmless, use it at your own risk
 
 ## About the source code
 I'm pollishing it, when I have a better source code I'll release it to the public
-
-## For Azur Lane devs
-If ever a developer of the game reads this, please dont ban me or takedown the project, first contact me on discord, I think mod developing can be good, and this is only a tool, like I said before I do not support cheaters, I'm not doing this project with bad intentions, please before taking actions on this contact me
 
 # Adding mods
 After you install FormidableML create a folder named mods inside Android/data/com.YostarEN.AzurLane/files and put inside all the mods folder you want
 
 ## Installing FormidableML using the autopatcher
-1. Download libFormidableML.so and AzurLane-Autopatcher.zip from [here](https://github.com/roiniti/Formidable-Mod-Loader/releases/tag/FormidableML-0.1.0)
+1. Download the library zip and AzurLane-Autopatcher.zip from [here](https://github.com/roiniti/AZLAutopatcher)
 2. Extract AzurLane-Autopatcher.zip
-3. In the same folder as AzurLaneAutopatcher.exe put the Azur Lane apk (rename it to azur-lane.apk) and the libFormidableML.so
-4. Execute AzurLaneAutopatcher.exe
+3. In the same folder as AZLAutopatcher.exe put the Azur Lane apk and inside a folder named libs put the arm64-v8a armeabi... folders
+4. Open a terminal/cmd/powershell in the folder AZLAutopatcher.exe -a "apk-name"
 5. Install the apk and then (if you hadn't) add the obb files
 
 ## Installing FormidableML yourself
