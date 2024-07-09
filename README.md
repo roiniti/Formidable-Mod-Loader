@@ -24,9 +24,6 @@ Also I want to thank Egoist (https://github.com/Egoistically) for helping me wit
 > [!WARNING]
 > This is a modification of the game and can lead to a ban, but some mods should be harmless, use it at your own risk
 
-## About the source code
-I'm pollishing it, when I have a better source code I'll release it to the public
-
 # Adding mods
 After you install FormidableML create a folder named mods inside Android/data/com.YostarEN.AzurLane/files and put inside all the mods folder you want
 
