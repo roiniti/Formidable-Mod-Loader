@@ -1,8 +1,12 @@
 # Formidable-Mod-Loader
-
+## Building 
+If you want to build it yourself you have the build instructions in the main.c file
 # For azur lane devs 
 This project is intened to enchance the game with things like BetterFPS mod or to load translations to languages which Azur Lane doesn't support right now like spanish, if you have trouble with cheaters (which I don't support and allow), implement more defenses on the server side because every cliend side patch to prevent this can be avoided.
 If having reasoned this you still want me to take down the project please join the [discord server](https://discord.gg/Wg3pNmmS5J), and DM me @roiniti.
+
+
+
 
 > [!NOTE]
 > If you have Azur Lane version 5.1-7.x its recomended to use the version 0.1.1 of the modloader
