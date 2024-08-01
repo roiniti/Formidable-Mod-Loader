@@ -98,7 +98,7 @@ int load_api(lua_State* L) {
     azur_luaL_dostring(L, TABLE_TO_STRING_FUNCTION);
     azur_luaL_dostring(L, PATH_EXISTS_FUNCTION);
     azur_luaL_dostring(L, ALOG_FUNCTION);
-    azur_luaL_dostring(L, "");
+    azur_luaL_dostring(L, ("HomeRoute = " + '"' + globvar::home_route + '"').c_str());
 
     return 0;
 }
