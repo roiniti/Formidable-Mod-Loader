@@ -6,4 +6,5 @@ namespace globvar {
 	Il2CppImage* image;
 	bool libLoaded;
 	bool mod_loaded;
+	bool canload;
 }

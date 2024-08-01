@@ -8,6 +8,7 @@
 #include <fcntl.h>
 #include "Substrate/SymbolFinder.h"
 
+#include "Context.h"
 #include "core/my_cpparser.h"
 #include "ModApi/my_lua_tolstring.h"
 #include "lua_hooker.h"
@@ -22,60 +23,6 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 
-#define REMOTE_DISABLED false
-
-#if defined(__aarch64__)
-#define BUILDVER "arm64"
-#define CPPARSER_ADDR 0x00046420
-#define LJ_LEX_SETUP_ADDR 0x00043480
-#define LJ_BCREAD_ADDR 0x00045740
-#define LJ_FUNC_NEWL_EMPTY_ADDR 0x00351f0
-#define LJ_ERR_STR_ADDR 0x0003142c
-#define LJ_ERR_THROW_ADDR 0x0003123c
-
-#define LUAL_LOADFILE_ADDR 0x00046788
-#define LUAL_LOADSTRING_ADDR 0x000467c4
-#define LUAL_PCALL_ADDR 0x00042788
-
-#define LUA_GETFIELD_ADDR 0x00049c10
-#define LUA_PUSHCCLOSURE_ADDR 0x000496c0
-#define LUA_SETFIELD_ADDR 0x0004a310
-#define LUA_SETTOP_ADDR 0x00048630
-#elif defined(__arm__ )
-#define BUILDVER "arm32"
-#define CPPARSER_ADDR 0x00044ca8
-#define LJ_LEX_SETUP_ADDR 0x0003cc38
-#define LJ_BCREAD_ADDR 0x0004403c
-#define LJ_FUNC_NEWL_EMPTY_ADDR 0x000313dc
-#define LJ_ERR_STR_ADDR 0x0002e558
-#define LJ_ERR_THROW_ADDR 0x0002e510
-
-#define LUAL_LOADFILE_ADDR 0x0004504c
-#define LUAL_LOADSTRING_ADDR 0x000450a4
-#define LUAL_PCALL_ADDR 0x0003c180
-
-#define LUA_GETFIELD_ADDR 0x0
-#define LUA_PUSHCCLOSURE_ADDR 0x0
-#define LUA_SETFIELD_ADDR 0x0
-#define LUA_SETTOP_ADDR 0x0
-#else
-#define BUILDVER "x86"
-#define CPPARSER_ADDR 0x00054800
-#define LJ_LEX_SETUP_ADDR 0x0004b500
-#define LJ_BCREAD_ADDR 0x00053800
-#define LJ_FUNC_NEWL_EMPTY_ADDR 0x0003d140
-#define LJ_ERR_STR_ADDR 0x00039520
-#define LJ_ERR_THROW_ADDR 0x00039330
-
-#define LUAL_LOADFILE_ADDR 0x00054cb0
-#define LUAL_LOADSTRING_ADDR 0x00054d80
-#define LUAL_PCALL_ADDR 0x0004a830
-
-#define LUA_GETFIELD_ADDR 0x0
-#define LUA_PUSHCCLOSURE_ADDR 0x0
-#define LUA_SETFIELD_ADDR 0x0
-#define LUA_SETTOP_ADDR 0x0
-#endif
 
 namespace Function_Hooker {
 
@@ -224,12 +171,15 @@ namespace Function_Hooker {
         logValue("funvalues", "lj_parse: %p", lj_parse);
     }
 
+
+
     #define PORT 15156
     #define MAX_BUFFER_SIZE 1024
     // thread where everything is ran
     void* hook_thread(void*) {
         logSeparator("values");
-        logMessage("values", "compstr: 3b");
+        logValue("values", "compstr:", COMPSTR);
+        logValue("values", "Formidable_ML Version: ",VERSION);
         logValue("values", "Build arch version: %s", BUILDVER);
 
         // check if target lib is loaded
@@ -260,12 +210,16 @@ namespace Function_Hooker {
             (void**)&old_cpparser);/**/
 
 
+       // AzurLaneL::lua_pcall = (int (*)(lua_State*, int, int, int)) /*(GETLUAFUNC("lua_pcall"));/**/;/**/
 
 
         //TODO move to another class
-        if (REMOTE_DISABLED) {
-            logMessage("modloader", "Remote code upload disabled, this feature is WIP will be released later...");
+        if (!REMOTE_EXECUTION) {
+            logMessage("modloader", "Remote code execution disabled, this feature is only enabled in dev version...");
             return nullptr;
+        }
+        else {
+            logMessage("modloader", "Remote code execution enabled, use it only in a controled environment!!");
         }
 
 

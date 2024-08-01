@@ -9,6 +9,7 @@ namespace globvar{
 	extern unsigned long luabase;
 	extern bool libLoaded;
 	extern bool mod_loaded;
+	extern bool canload;
 }
 
 #endif // !MOD_VAR

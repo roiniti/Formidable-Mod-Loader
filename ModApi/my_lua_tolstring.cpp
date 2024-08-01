@@ -32,7 +32,10 @@ void include(lua_State* L, const char* path)
     std::string fullpath = "";
     fullpath.append(globvar::home_route);
     fullpath.append(mods);
-    azur_luaL_dofile(L, fullpath.c_str());
+    if (azur_luaL_dofile(L, fullpath.c_str()) != LUA_OK) {
+        const char* errorMsg = lua_tostring(L, -1);
+        logValue("lualog","Cannot execute code %s",errorMsg);
+    }
 }
 int hook_include(lua_State* L);
 int load_api(lua_State* L);
@@ -42,6 +45,17 @@ int hook_include(lua_State* L) {
     const char* path = lua_tostring(L, 1);
     include(L, path);
     return 0;
+}
+int hook_pathExists(lua_State* L) {
+    const char* path = lua_tostring(L, 1);
+    std::string fullpath = globvar::home_route + "/mods/" + path;
+    FILE* file = fopen(fullpath.c_str(), "r");
+    if (file) {
+        fclose(file);
+        lua_pushboolean(L, true);
+    }else
+        lua_pushboolean(L, false);
+    return 1;
 }
 int android_log(lua_State* L) {
     const char* message = lua_tostring(L, 1);
@@ -66,8 +80,10 @@ int load_api(lua_State* L) {
     LuaExecutor::loadString = lString;
     //logMessage("apiloader", "Loading cinclude...");
     LuaHooker::registerCasLua(L, hook_include, "cinclude");
+
+    LuaHooker::registerCasLua(L, hook_pathExists, "cpathExists");
     //logMessage("apiloader", "Loading alog...");
-    LuaHooker::registerCasLua(L, android_log, "alog");
+    LuaHooker::registerCasLua(L, android_log, "calog");
     //logMessage("apiloader", "Loading alogt...");
     LuaHooker::registerCasLua(L, android_log_t, "alogt");
     //logMessage("apiloader", "Loading dummy...");
@@ -80,6 +96,9 @@ int load_api(lua_State* L) {
     azur_luaL_dostring(L, TAB_TO_STRING_FUNCTION);
     //logMessage("apiloader", "Loading table to string...");
     azur_luaL_dostring(L, TABLE_TO_STRING_FUNCTION);
+    azur_luaL_dostring(L, PATH_EXISTS_FUNCTION);
+    azur_luaL_dostring(L, ALOG_FUNCTION);
+    azur_luaL_dostring(L, "");
 
     return 0;
 }
@@ -114,15 +133,60 @@ int simple_load(lua_State* L,std::string path) {
 // the game needs to call it no times before on versions 5.1-7.x and 1 times for 8.x-current
 //0 for 5.1-7.x, 1 for 8.x+
 int tolstring_until_load = 1;
+
+void load_FML(lua_State* L) {
+
+    if (DISABLED) {
+        logMessage("modloader", "Modloader is disabled");
+        return;
+    }
+    if (!globvar::mod_loaded) {
+        globvar::mod_loaded = true;
+        logMessage("modloader", "Loading lua modapi...");
+        load_api(L);
+        logMessage("modloader", "Checking for mod files...");
+        std::unique_ptr<std::list<AzurModInfo>> mod_info = read_mods_info(globvar::home_route + "/mods");
+
+
+        if (mod_info == nullptr)
+        {
+            logMessage("modloader", "No mods found...");
+            print_mgr(L, "No mods found...");
+        }
+        else for (const AzurModInfo& info : *(mod_info)) {
+            logValue("modloader", "Loading %s", info.modname.c_str());
+            int status = simple_load(L, info.mod_path);
+            logValue("modloader", "%s load complete! Status:%d", info.modname.c_str(), status);
+            logMessage("modloader", "loaded!");
+            print_mgr(L, info.mod_path + " Loaded!");
+        }
+
+
+
+        logMessage("modloader", "Check complete!");
+    }
+}
+
+
+
 void my_lua_tolstring(lua_State* L, int index, int& strLen) {
 
+    if (globvar::canload) {
+        load_FML(L);
+    }
 
+
+    return old_lua_tolstring(L, index, strLen);
+    /*
+
+    logMessage("testo", "CANNOT LOAD");
 
     if (DISABLED) {
         logMessage("modloader", "Modloader is disabled");
         return old_lua_tolstring(L, index, strLen);
     }
     if (!globvar::mod_loaded) {
+        logMessage("testo", "NOW CAN LOAD");
         if (tolstring_until_load != 0) {
             logValue("modloader", "need %d calls more to be loaded", tolstring_until_load);
             tolstring_until_load--;
@@ -155,4 +219,5 @@ void my_lua_tolstring(lua_State* L, int index, int& strLen) {
         logMessage("modloader", "Check complete!");
     }
     return old_lua_tolstring(L, index, strLen);
+    */
 }

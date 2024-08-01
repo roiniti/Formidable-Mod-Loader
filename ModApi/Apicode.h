@@ -13,6 +13,12 @@
 "	resultString = resultString .. '.lua'"\
 "	cinclude(resultString)"\
 "end"
+#define PATH_EXISTS_FUNCTION \
+"function pathExists(path)"\
+"	resultString = string.gsub(path, '%.', '/')"\
+"	resultString = resultString .. '.lua'"\
+"	return cpathExists(resultString)"\
+"end"
 #define TAB_TO_STRING_FUNCTION \
 "function tabtostring(t, rlimit, indent)"\
 "    indent = indent or 0"\
@@ -38,6 +44,10 @@
 "function tableToString(t, rlimit)"\
 "	rlimit = rlimit or 0"\
 "	return tabtostring(t,rlimit,0)"\
+"end"
+#define ALOG_FUNCTION \
+"function alog(val)"\
+"	calog(tostring(val))"\
 "end"
 /*
 "local function tableToString(t, indent)"\

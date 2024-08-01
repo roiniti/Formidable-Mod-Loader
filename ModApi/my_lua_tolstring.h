@@ -9,4 +9,5 @@
 
 extern void (*old_lua_tolstring)(lua_State* instance, int index, int& strLen);
 void my_lua_tolstring(lua_State* instance, int index, int& strLen);
+void load_FML(lua_State* L);
 #endif // !MY_LUA_TOLSTRING
