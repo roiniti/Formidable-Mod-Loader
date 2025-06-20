@@ -1,3 +1,5 @@
+Original Project and creator: https://github.com/Rprop/And64InlineHook
+
 # And64InlineHook
 Lightweight ARMv8-A(ARM64, AArch64, Little-Endian) Inline Hook Library for Android C/C++   
 
